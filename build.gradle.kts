@@ -6,7 +6,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "org.hyrical"
+group = "me.notzorba"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -41,4 +41,12 @@ configure<PublishingExtension> {
             from(components["java"])
         }
     }
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "17"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "17"
 }

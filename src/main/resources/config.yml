@@ -1,0 +1,10 @@
+#The prefix before the announcement message
+prefix: '&6&lTIP &r&7➥ &e'
+
+#How long between each broadcast message, in seconds.
+interval: 60
+
+announcements:
+  - '&eThank you for downloading &6Impulse'
+  - '&eThis is an %nl%example of multi line %nl%broadcasts'
+  - '&eOnce you update the config make sure to reload the plugin by doing &6/impulse reload'

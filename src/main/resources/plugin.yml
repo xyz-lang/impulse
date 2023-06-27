@@ -1,4 +1,6 @@
 name: Impulse
 version: 1.0
 api-version: 1.17
+author: NotZorba
 main: me.notzorba.impulse.Impulse
+softdepend: [PlaceholderAPI]

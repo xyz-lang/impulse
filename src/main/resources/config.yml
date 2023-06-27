@@ -1,10 +1,11 @@
-#The prefix before the announcement message
-prefix: '&6&lTIP &r&7➥ &e'
-
 #How long between each broadcast message, in seconds.
-interval: 60
+#Set to 15 to see all announcements. I recommend about a 60 second interval between announcements.
+interval: 15
 
 announcements:
-  - '&eThank you for downloading &6Impulse'
-  - '&eThis is an %nl%example of multi line %nl%broadcasts'
-  - '&eOnce you update the config make sure to reload the plugin by doing &6/impulse reload'
+  - '&6&lIMPULSE &8&l- &eThank you for downloading &6Impulse'
+  - '%nl%&eThis is an example %nl%of multi line broadcasts%nl%'
+  - '&6&lIMPULSE &8&l- &eOnce you update the config make sure to reload the plugin by doing &6/impulse reload'
+  - '&6&lCONFIG &8&l- &eChange these messages in the &6config.yml'
+
+reload-message: '&eReloaded the config'

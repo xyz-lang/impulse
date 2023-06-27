@@ -1,6 +1,7 @@
 package me.notzorba.impulse.tasks
 
 import me.notzorba.impulse.Impulse
+import me.notzorba.impulse.hooks.PlaceholderAPIWrapper
 import me.notzorba.impulse.util.Chat
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
@@ -25,7 +26,13 @@ object AutoBroadcastTask : BukkitRunnable() {
     override fun run() {
         val message = announcements[i]
 
-        Bukkit.broadcastMessage(Chat.format(Impulse.instance.config.getString("prefix") + message))
+        if (PlaceholderAPIWrapper.isPresent()) {
+            Bukkit.getOnlinePlayers().forEach {
+                it.sendMessage(PlaceholderAPIWrapper.withPlaceholders(it, Chat.format(message)))
+            }
+        } else {
+            Bukkit.broadcastMessage(Chat.format(message))
+        }
 
         if (i == announcements.size - 1) {
             i = 0

@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandPermission
 import me.notzorba.impulse.Impulse
+import me.notzorba.impulse.hooks.PlaceholderAPIWrapper
 import me.notzorba.impulse.tasks.AutoBroadcastTask
 import me.notzorba.impulse.util.Chat
 import org.bukkit.Bukkit
@@ -16,8 +17,13 @@ object ForceBroadcast : BaseCommand() {
     fun forceBroadcast(sender: Player) {
         val message = AutoBroadcastTask.announcements[AutoBroadcastTask.i]
 
-        Bukkit.broadcastMessage(Chat.format(Impulse.instance.config.getString("prefix") + message))
-
+        if (PlaceholderAPIWrapper.isPresent()) {
+            Bukkit.getOnlinePlayers().forEach {
+                it.sendMessage(PlaceholderAPIWrapper.withPlaceholders(it, Chat.format(message)))
+            }
+        } else {
+            Bukkit.broadcastMessage(Chat.format(message))
+        }
         if (AutoBroadcastTask.i == AutoBroadcastTask.announcements.size - 1) {
             AutoBroadcastTask.i = 0
         } else {

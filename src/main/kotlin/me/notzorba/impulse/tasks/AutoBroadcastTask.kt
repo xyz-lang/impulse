@@ -6,12 +6,15 @@ import me.notzorba.impulse.util.Chat
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.scheduler.BukkitRunnable
+import org.bukkit.scheduler.BukkitTask
 
 object AutoBroadcastTask : BukkitRunnable() {
 
     var i = 0
 
     val announcements: MutableList<String> = mutableListOf()
+    var task: BukkitTask? = null
+    var taskID: Int = -1
 
     fun load(config: FileConfiguration) {
         announcements.clear()
@@ -20,19 +23,34 @@ object AutoBroadcastTask : BukkitRunnable() {
             announcements.add(config.getStringList("announcements")[i].replace("%nl%", "\n"))
         }
 
-        runTaskTimer(Impulse.instance, 20L, config.getInt("interval").toLong() * 20)
+        task?.cancel()
+
+        task = object : BukkitRunnable() {
+            var i = 0
+
+            override fun run() {
+                val message = announcements[i]
+
+                Bukkit.broadcastMessage(Chat.format(message))
+
+                if (i == announcements.size - 1) {
+                    i = 0
+                } else {
+                    i++
+                }
+            }
+        }.runTaskTimer(Impulse.instance, 20L, config.getInt("interval").toLong() * 20)
     }
 
+
     override fun run() {
+        if (task?.isCancelled == true) {
+            return
+        }
+
         val message = announcements[i]
 
-        if (PlaceholderAPIWrapper.isPresent()) {
-            Bukkit.getOnlinePlayers().forEach {
-                it.sendMessage(PlaceholderAPIWrapper.withPlaceholders(it, Chat.format(message)))
-            }
-        } else {
-            Bukkit.broadcastMessage(Chat.format(message))
-        }
+        Bukkit.broadcastMessage(Chat.format(message))
 
         if (i == announcements.size - 1) {
             i = 0

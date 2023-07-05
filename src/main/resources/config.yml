@@ -4,7 +4,7 @@ interval: 15
 
 announcements:
   - '&6&lIMPULSE &8&l- &eThank you for downloading &6Impulse'
-  - '%nl%&eThis is an example %nl%of multi line broadcasts%nl%'
+  - '%nl%&6&lIMPULSE &7➥ %nl%&eThis is an example of multi line broadcasts%nl%'
   - '&6&lIMPULSE &8&l- &eOnce you update the config make sure to reload the plugin by doing &6/impulse reload'
   - '&6&lCONFIG &8&l- &eChange these messages in the &6config.yml'
 

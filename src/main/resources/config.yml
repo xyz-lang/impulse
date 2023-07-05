@@ -1,11 +1,13 @@
 #How long between each broadcast message, in seconds.
-#Set to 15 to see all announcements. I recommend about a 60 second interval between announcements.
+#Auto set to 15 so you see all announcements. I recommend about a 60 second interval between announcements.
 interval: 15
 
+# Create, delete, edit as many as you want by making a new line and spacing it correctly
 announcements:
   - '&6&lIMPULSE &8&l- &eThank you for downloading &6Impulse'
   - '%nl%&6&lIMPULSE &7➥ %nl%&eThis is an example of multi line broadcasts%nl%'
   - '&6&lIMPULSE &8&l- &eOnce you update the config make sure to reload the plugin by doing &6/impulse reload'
   - '&6&lCONFIG &8&l- &eChange these messages in the &6config.yml'
 
+#Message send when /impulse reload is executed
 reload-message: '&eReloaded the config'

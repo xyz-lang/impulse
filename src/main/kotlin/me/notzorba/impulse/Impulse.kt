@@ -22,8 +22,4 @@ class Impulse : JavaPlugin() {
         commandManager.registerCommand(ReloadCommand)
         AutoBroadcastTask.load(config)
     }
-
-    fun reload() {
-        Impulse.instance.reload()
-    }
 }
